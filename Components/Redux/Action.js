@@ -1,0 +1,3 @@
+export const FORM_DATA = 'FORM_DATA';
+export const SET_FORMDATA= 'SET_FORMDATA';
+export const SET_BOOKINGLIST= 'SET_BOOKINGLIST';
