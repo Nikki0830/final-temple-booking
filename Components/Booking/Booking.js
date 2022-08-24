@@ -5,6 +5,8 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  Alert,
+  ToastAndroid
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -14,6 +16,7 @@ import {setBookingList, setFormdata} from '../Redux/ActionType';
 // import {log} from 'react-native-reanimated';
 import moment from 'moment';
 import axios from 'axios';
+
 
 const Booking = ({navigation}) => {
   const [formData, setFormData] = useState({
@@ -52,27 +55,72 @@ const Booking = ({navigation}) => {
     if (Platform.OS === 'android') {
       setIsPickerShow(false);
     }
+    if (
+      moment(formData.date).format('DD/MM/YYYY') !==
+      moment().format('DD/MM/YYYY')
+    ) {
+      // Alert.alert("Sorry! you can not book for previous date")
+      ToastAndroid.showWithGravityAndOffset(
+        "Sorry! you can not book for previous date",
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        10,
+        -500
+      )
+    }
   };
   const handleChange = (key, val) => {
     setFormData({...formData, [key]: val});
   };
 
-  let formData2 = [];
+  // let formData2 = [];
 
   // //button click funtion
   function handleClick2() {
-    // console.log("nikita")
-    formData2 = [
-      ...formData2,
-      {
-        username: formData.username,
-        date: formData.date,
-        children: formData.children,
-        adult: formData.adult,
-        phone: formData.phone,
-      },
-    ];
-    console.log('formdata2', formData2);
+    console.log('nikita');
+    // formData2 = [
+    //   ...formData2,
+    //   {
+    //     username: formData.username,
+    //     date: formData.date,
+    //     children: formData.children,
+    //     adult: formData.adult,
+    //     phone: formData.phone,
+    //   },
+    // ];
+    // console.log('formdata2', formData2);
+    // axios
+    //   .post('https://temple-server.herokuapp.com/users', {
+    //     username: formData.username,
+    //     adult: formData.adult,
+    //     children: formData.children,
+    //     email: formData.email,
+    //     phone: formData.phone,
+    //     date: formData.date,
+    //   })
+    //   // console.log("USERNAME",formData.username)
+    //   .then(response => {
+    //     console.log('response', response.data);
+    //     //     res.send(response.data)
+    //     // console.log('hello2');
+    //     // console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrr")
+
+    //     // dispatch(formdata(response.data));
+    //   })
+
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    // //get method
+    // axios
+    //   .get('https://temple-server.herokuapp.com/users')
+    //   .then(response => {
+    //     // res.send(response.data)
+    //     console.log('response', response);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
     axios
       .post('https://temple-server.herokuapp.com/users', {
         username: formData.username,
@@ -83,21 +131,26 @@ const Booking = ({navigation}) => {
         date: formData.date,
       })
       .then(response => {
-        console.log('response', response.data);
+        console.log(response.data);
+        console.log('Nik 1 -', response.data);
         // dispatch(formdata(response.data));
       })
       .catch(err => {
+        console.log('Nik 2 -', err);
         console.log(err);
       });
     //get method
     axios
       .get('https://temple-server.herokuapp.com/users')
       .then(response => {
+        console.log('Nik 3 -', response.data);
         console.log('response', response);
       })
       .catch(err => {
+        console.log('Nik 3 -', err);
         console.log(err);
       });
+    console.log('hello');
     // formData2 = [...formData2, {username, adult, children, phone,date}];
     // console.log('formdata', formData, bookingList);
     let tempBooklist = bookingList;
@@ -119,8 +172,23 @@ const Booking = ({navigation}) => {
       date: formData.date,
     };
     reduxDispatch(setFormdata(tempCurrentBookListData));
-    navigation.push('Bookingdetails');
-    console.log('hello');
+    if (
+      moment(formData.date).format('DD/MM/YYYY') ==
+      moment().format('DD/MM/YYYY')
+    ) {
+      navigation.push('Bookingdetails');
+    }else{
+      // Alert.alert("Please enter today's date")
+      ToastAndroid.showWithGravityAndOffset(
+        "Please enter today's date",
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        10,
+        -500
+      )
+    }
+  
+    console.log('hello2');
   }
 
   return (

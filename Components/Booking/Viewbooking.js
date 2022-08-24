@@ -1,4 +1,10 @@
-import {StyleSheet, Text, View, TouchableOpacity,ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {setBookingList} from '../Redux/ActionType';
@@ -15,18 +21,10 @@ const Viewbooking = ({navigation}) => {
   useEffect(() => {
     console.log('viewBookingdeatails', viewBookingdeatails);
     axios
-    .get('https://temple-server.herokuapp.com/users')
-    .then(response => setUser(response.data))
+      .get('https://temple-server.herokuapp.com/users')
+      .then(response => setUser(response.data));
 
-    console.log("USER",user)
-  
-    let currentDateBookingList = [];
-    (user.filter(
-      item =>
-        moment(item.date).format('DD/MM/YYYY') == moment().format('DD/MM/YYYY'),
-    )),
-      setcurrentBooking(currentDateBookingList),
-      console.log('current', currentBooking);
+    console.log('USER', user);
 
     let previousDateBookingList = [];
     previousDateBookingList = user.filter(
@@ -37,7 +35,14 @@ const Viewbooking = ({navigation}) => {
     setPreviousBooking(previousDateBookingList),
       console.log('previous', previousBooking);
 
-  }, []);
+    let currentDateBookingList = [];
+    currentDateBookingList = user.filter(
+      item =>
+        moment(item.date).format('DD/MM/YYYY') == moment().format('DD/MM/YYYY'),
+    ),
+      setcurrentBooking(currentDateBookingList);
+    console.log('current', currentBooking);
+  },[]);
   const handleSubmit = () => {
     // console.log('formdata', formData, bookingList);
     let tempBooklist = viewBookingdeatails;
@@ -107,7 +112,7 @@ const Viewbooking = ({navigation}) => {
               </View>
             );
           })}
-           {/* {currentBooking.map((element) => {
+          {/* {currentBooking.map((element) => {
         console.log(element.date);
         return (
           <View>
