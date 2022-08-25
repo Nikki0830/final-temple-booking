@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import React, {Component} from 'react';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -15,6 +16,7 @@ import i18n from '../i18nn/Translation/i18n';
 class Landing extends Component {
   constructor(props) {
     super(props);
+
   }
   state = {
     animation: new Animated.Value(0),
@@ -37,6 +39,14 @@ class Landing extends Component {
   changeLanguage = lang => {
     i18n.changeLanguage(lang);
   };
+  handleLoginClick = () => {
+    ToastAndroid.showWithGravity(
+      "First you have to do signup",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+    this.props.navigation.navigate('Signup');
+  };
   render() {
     const rotateInterpolate = this.state.animation.interpolate({
       inputRange: [0, 360],
@@ -50,7 +60,9 @@ class Landing extends Component {
         // {rotateY: rotateInterpolate},
       ],
     };
+
     const {t} = this.props;
+
     return (
       <View>
         {/* <Text>Landing</Text> */}
@@ -92,7 +104,7 @@ class Landing extends Component {
                   textShadowOffset: {width: 2, height: 2},
                   textShadowRadius: 5,
                 }}>
-               {t('read')}
+                {t('read')}
               </Text>
             </Animated.View>
           </TouchableWithoutFeedback>
@@ -155,7 +167,8 @@ class Landing extends Component {
           {/* <TButton/> */}
           <TouchableOpacity
             style={styles.opacity}
-            onPress={() => this.props.navigation.navigate('Login')}>
+            // onPress={() => this.props.navigation.navigate('Login')}>
+            onPress={() => this.handleLoginClick()}>
             <Text
               style={{
                 color: 'white',

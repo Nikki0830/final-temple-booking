@@ -4,8 +4,10 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import React, {Component} from 'react';
+import axios from 'axios';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -17,6 +19,67 @@ export default class Signup extends Component {
       cpassword: '',
     };
   }
+  handleInputChange = (key, val) => {
+    this.setState({...this.state, [key]: val});
+    console.log(this.state);
+  };
+  handleInputClick = () => {
+    axios
+      .post('https://temple-server.herokuapp.com/users', {
+        username: this.state.username,
+        password: this.state.password,
+        email: this.state.email,
+        cpassword: this.state.cpassword,
+      })
+      .then(response => {
+        console.log(response.data);
+        console.log('Nikita 1 -', response.data);
+        // dispatch(formdata(response.data));
+      })
+      .catch(err => {
+        console.log('Nikita 1 -', err);
+        console.log(err);
+      });
+    //get method
+    axios
+      .get('https://temple-server.herokuapp.com/users')
+      .then(response => {
+        console.log('Nikita 2 -', response.data);
+        console.log('response', response);
+      })
+      .catch(err => {
+        console.log('Nikita 2 -', err);
+        console.log(err);
+      });
+    console.log('hello');
+    if (this.state.password !== this.state.cpassword) {
+      ToastAndroid.showWithGravityAndOffset(
+        'Please enter correct password',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        10,
+        -500,
+      );
+    }
+    if (
+      this.state.username.length > 0 &&
+      this.state.password.length > 0 &&
+      this.state.email.length > 0 &&
+      this.state.username.length > 0 && 
+      this.state.password == this.state.cpassword
+    ) {
+      this.props.navigation.navigate('Login');
+    }else{
+      ToastAndroid.showWithGravityAndOffset(
+        'Please fill the details',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        10,
+        -500,
+      );
+    }
+   
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -37,7 +100,7 @@ export default class Signup extends Component {
           placeholder="Username"
           autoCapitalize="none"
           placeholderTextColor="yellow"
-          onChangeText={val => this.onChangeText('username', val)}
+          onChangeText={val => this.handleInputChange('username', val)}
         />
         <TextInput
           style={styles.input}
@@ -45,7 +108,7 @@ export default class Signup extends Component {
           // secureTextEntry={true}
           autoCapitalize="none"
           placeholderTextColor="yellow"
-          onChangeText={val => this.onChangeText('phone', val)}
+          onChangeText={val => this.handleInputChange('email', val)}
         />
         <TextInput
           style={styles.input}
@@ -53,7 +116,7 @@ export default class Signup extends Component {
           secureTextEntry={true}
           autoCapitalize="none"
           placeholderTextColor="yellow"
-          onChangeText={val => this.onChangeText('password', val)}
+          onChangeText={val => this.handleInputChange('password', val)}
         />
 
         <TextInput
@@ -62,9 +125,11 @@ export default class Signup extends Component {
           secureTextEntry={true}
           autoCapitalize="none"
           placeholderTextColor="yellow"
-          onChangeText={val => this.onChangeText('confirmPassword', val)}
+          onChangeText={val => this.handleInputChange('cpassword', val)}
         />
-        <TouchableOpacity style={styles.opacity2}>
+        <TouchableOpacity
+          style={styles.opacity2}
+          onPress={() => this.handleInputClick()}>
           <Text
             style={{
               color: 'white',
@@ -74,7 +139,7 @@ export default class Signup extends Component {
               fontSize: 20,
               fontStyle: 'italic',
             }}>
-            Submit
+            Signup
           </Text>
         </TouchableOpacity>
       </View>
@@ -95,6 +160,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontSize: 18,
     fontWeight: 'bold',
+    color: 'yellow',
   },
   container: {
     flex: 1,

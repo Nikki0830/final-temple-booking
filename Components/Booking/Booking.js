@@ -5,7 +5,6 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  Alert,
   ToastAndroid
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
