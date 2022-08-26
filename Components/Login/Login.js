@@ -106,7 +106,7 @@ export default class Login extends Component {
     // let loginDetailsOfUser;
     // console.log('USERLogin3', this.state.user.usersData);
     // console.log('USERLogin3', this.state.user.usersData.length);
-     let flag = true;
+    //  let flag = true;
     for (let i = 0; i < this.state.user.usersData.length; i++) {
       //confirming the both login page data with the data is already stored by signup page into the global state comparing the both of them
       console.log('USERLogin4', this.state.user.usersData[i]);
@@ -138,9 +138,9 @@ export default class Login extends Component {
         // ToastAndroid.show("Please fill the  correct details", ToastAndroid.SHORT);
         // Alert.alert("Please fill the  correct details");
         ToastAndroid.showWithGravity(
-          "Please fill the  correct details",
+          'Please fill the  correct details',
           ToastAndroid.SHORT,
-          ToastAndroid.CENTER
+          ToastAndroid.CENTER,
         );
       }
     }
@@ -182,43 +182,53 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text
+        <View
           style={{
-            color: 'yellow',
-            fontWeight: 'bold',
-            marginLeft: -10,
-            fontSize: 22,
-            marginTop: -60,
-            fontStyle: 'italic',
-            textDecorationLine: 'underline',
-            textShadowColor: 'red',
-            textShadowOffset: {width: 2, height: 2},
-            textShadowRadius: 5,
+            borderWidth: 2,
+            borderColor: 'greenyellow',
+            height: 260,
+            width: 350,
+            borderRadius:10,
+            elevation:3,
+            shadowColor:"greenyellow"
           }}>
-          Welcome to Temple Booking
-        </Text>
+          <Text
+            style={{
+              color: 'greenyellow',
+              fontWeight: 'bold',
+              marginLeft: 15,
+              fontSize: 23,
+              marginTop: -60,
+              fontStyle: 'italic',
+              textDecorationLine: 'underline',
+              textShadowColor: 'red',
+              textShadowOffset: {width: 2, height: 2},
+              textShadowRadius: 5,
+            }}>
+            Welcome for Temple Booking
+          </Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          // maxLength={8}
-          autoCapitalize="none"
-          placeholderTextColor="yellow"
-          // onChangeText={val => this.handleClick('username', val)}
-          onChangeText={item => this.handleClick(item, 'username')}
-        />
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            // maxLength={8}
+            autoCapitalize="none"
+            placeholderTextColor="yellow"
+            // onChangeText={val => this.handleClick('username', val)}
+            onChangeText={item => this.handleClick(item, 'username')}
+          />
 
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          // maxLength={8}
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="yellow"
-          // onChangeText={val => this.handleClick('password', val)}
-          onChangeText={item => this.handleClick(item, 'password')}
-        />
-        {/* 
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            // maxLength={8}
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="yellow"
+            // onChangeText={val => this.handleClick('password', val)}
+            onChangeText={item => this.handleClick(item, 'password')}
+          />
+          {/* 
         <TextInput
           style={styles.input}
           placeholder="confirm Password"
@@ -227,25 +237,26 @@ export default class Login extends Component {
           placeholderTextColor="yellow"
           onChangeText={val => this.onChangeText('confirmPassword', val)}
         /> */}
-        <TouchableOpacity
-          style={styles.opacity2}
-          // onPress={() => this.props.navigation.navigate('Lottify')}>
-          onPress={() => this.handleSubmit()}>
-          <Text
-            style={{
-              color: 'white',
-              textAlign: 'center',
-              marginTop: 8,
-              fontWeight: 'bold',
-              fontSize: 20,
-              fontStyle: 'italic',
-              textShadowColor: 'red',
-              textShadowOffset: {width: 2, height: 2},
-              textShadowRadius: 5,
-            }}>
-            Login
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.opacity2}
+            // onPress={() => this.props.navigation.navigate('Lottify')}>
+            onPress={() => this.handleSubmit()}>
+            <Text
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                marginTop: 8,
+                fontWeight: 'bold',
+                fontSize: 20,
+                fontStyle: 'italic',
+                textShadowColor: 'red',
+                textShadowOffset: {width: 2, height: 2},
+                textShadowRadius: 5,
+              }}>
+              Login
+            </Text>
+          </TouchableOpacity>
+        </View>
         {/* <ToastManager /> */}
       </View>
     );
@@ -255,7 +266,7 @@ const styles = StyleSheet.create({
   input: {
     width: 300,
     height: 52,
-    marginTop: 30,
+    marginTop: 40,
     borderWidth: 1,
     fontStyle: 'italic',
     borderLeftColor: 'transparent',
@@ -266,6 +277,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'yellow',
+    marginLeft:20
   },
   container: {
     flex: 1,
@@ -275,12 +287,14 @@ const styles = StyleSheet.create({
     height: 800,
   },
   opacity2: {
-    marginTop: 70,
+    marginTop: 30,
     width: 150,
     height: 50,
-    // marginLeft: 50,
+    marginLeft: 100,
     borderWidth: 3,
     borderColor: 'yellow',
     borderRadius: 50,
+    elevation:1,
+    shadowColor:"greenyellow"
   },
 });

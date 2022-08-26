@@ -65,11 +65,11 @@ export default class Signup extends Component {
       this.state.username.length > 0 &&
       this.state.password.length > 0 &&
       this.state.email.length > 0 &&
-      this.state.username.length > 0 && 
+      this.state.username.length > 0 &&
       this.state.password == this.state.cpassword
     ) {
       this.props.navigation.navigate('Login');
-    }else{
+    } else {
       ToastAndroid.showWithGravityAndOffset(
         'Please fill the details',
         ToastAndroid.LONG,
@@ -78,70 +78,83 @@ export default class Signup extends Component {
         -500,
       );
     }
-   
   };
   render() {
     return (
       <View style={styles.container}>
-        <Text
+        <View
           style={{
-            color: 'yellow',
-            fontWeight: 'bold',
-            marginLeft: -10,
-            fontSize: 22,
-            marginTop: -60,
-            fontStyle: 'italic',
-            textDecorationLine: 'underline',
+            borderWidth: 2,
+            borderColor: 'greenyellow',
+            height: 460,
+            width: 350,
+            borderRadius:10,
+            elevation:3,
+            shadowColor:"greenyellow"
           }}>
-          Welcome for Temple Booking
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          autoCapitalize="none"
-          placeholderTextColor="yellow"
-          onChangeText={val => this.handleInputChange('username', val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          // secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="yellow"
-          onChangeText={val => this.handleInputChange('email', val)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="yellow"
-          onChangeText={val => this.handleInputChange('password', val)}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="confirm Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor="yellow"
-          onChangeText={val => this.handleInputChange('cpassword', val)}
-        />
-        <TouchableOpacity
-          style={styles.opacity2}
-          onPress={() => this.handleInputClick()}>
           <Text
             style={{
-              color: 'white',
-              textAlign: 'center',
-              marginTop: 8,
+              color: 'greenyellow',
               fontWeight: 'bold',
-              fontSize: 20,
+              marginLeft: 15,
+              fontSize: 23,
+              marginTop: -60,
               fontStyle: 'italic',
+              textDecorationLine: 'underline',
+              textShadowColor: 'red',
+              textShadowOffset: {width: 2, height: 2},
+              textShadowRadius: 5,
             }}>
-            Signup
+            Welcome for Temple Booking
           </Text>
-        </TouchableOpacity>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            autoCapitalize="none"
+            placeholderTextColor="yellow"
+            onChangeText={val => this.handleInputChange('username', val)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            // secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="yellow"
+            onChangeText={val => this.handleInputChange('email', val)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="yellow"
+            onChangeText={val => this.handleInputChange('password', val)}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="confirm Password"
+            secureTextEntry={true}
+            autoCapitalize="none"
+            placeholderTextColor="yellow"
+            onChangeText={val => this.handleInputChange('cpassword', val)}
+          />
+          <TouchableOpacity
+            style={styles.opacity2}
+            onPress={() => this.handleInputClick()}>
+            <Text
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                marginTop: 8,
+                fontWeight: 'bold',
+                fontSize: 20,
+                fontStyle: 'italic',
+              }}>
+              Signup
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -150,7 +163,7 @@ const styles = StyleSheet.create({
   input: {
     width: 300,
     height: 52,
-    marginTop: 30,
+    marginTop: 40,
     borderWidth: 1,
     fontStyle: 'italic',
     borderLeftColor: 'transparent',
@@ -161,6 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'yellow',
+    marginLeft:20
   },
   container: {
     flex: 1,
@@ -170,12 +184,14 @@ const styles = StyleSheet.create({
     height: 800,
   },
   opacity2: {
-    marginTop: 70,
+    marginTop: 40,
     width: 150,
     height: 50,
-    // marginLeft: 50,
+    marginLeft: 100,
     borderWidth: 3,
     borderColor: 'yellow',
     borderRadius: 50,
+    elevation:1,
+    shadowColor:"greenyellow"
   },
 });
