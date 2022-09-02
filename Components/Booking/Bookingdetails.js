@@ -168,7 +168,7 @@ const Bookingdetails = ({navigation}) => {
             textShadowRadius: 5,
             fontStyle: 'italic',
           }}>
-          Time: {moment(confirmdetail.date).format('hh:mm')}
+          Time: {moment(confirmdetail.date).format('hh:mm A')}
         </Text>
       </View>
       <TouchableOpacity style={styles.opacity2} onPress={() => handleClick()}>

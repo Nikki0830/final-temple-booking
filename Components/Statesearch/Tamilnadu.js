@@ -12,6 +12,38 @@ import {tamilnaduData} from '../../db';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Tamilnadu = ({navigation}) => {
+  // const [search, setSearch] = useState([]);
+
+  // const hanldeSearch = (textSearch) => {
+  //   setSearch(
+  //     tamilnaduData.filter(item => {
+  //       // console.log(item.name),
+  //         item.name.toLowerCase().includes(textSearch.toLowerCase()),
+  //         console.log(item.name);
+  //     }),
+  //   );
+  // };
+  const [search, setSearch] = useState("");
+
+  //search input function
+//  const hanldeSearch = (val, key) => {
+//     setSearch({[key]: val});
+//     // var tempLength = tem.length;
+//     // if (tempLength == 5) {
+//     //   Alert.alert('Sorry, You Cannot Enter More Than 8 Characters...');
+//     // }
+//   }
+
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   console.log("clicked", search);
+  // };
+
+  //storing the filtering temple data in filterBame variable
+  const filterName = tamilnaduData.filter((ele) =>
+    ele.name.toLowerCase().includes(search.toLowerCase())
+  );
+  console.log("filter", filterName);
   // console.log(data);
   // const [search, setSearch] = useState('');
 
@@ -30,14 +62,14 @@ const Tamilnadu = ({navigation}) => {
   //   console.log('filterName', filterName);
   return (
     <View style={styles.container}>
-      {/* <TextInput
+      <TextInput
         style={styles.input}
         placeholder="Search..."
         autoCapitalize="none"
         placeholderTextColor="red"
-        // onChangeText={handleChange}
+        onChangeText={(text) => setSearch(text)}
         // value={search}
-      /> */}
+      />
 
       {/* {filterName.map(element => {
         return (
@@ -58,7 +90,7 @@ const Tamilnadu = ({navigation}) => {
         );
       })} */}
       <FlatList
-        data={tamilnaduData}
+        data={filterName}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item, index}) => (
           <TouchableOpacity onPress={() => navigation.navigate('Booking')}>
@@ -69,8 +101,8 @@ const Tamilnadu = ({navigation}) => {
                   fontWeight: 'bold',
                   fontSize: 18,
                   fontStyle: 'italic',
-                  textAlign:"center",
-                  marginTop:30,
+                  textAlign: 'center',
+                  marginTop: 30,
                   textShadowColor: 'red',
                   textShadowOffset: {width: 2, height: 2},
                   textShadowRadius: 5,
@@ -82,10 +114,10 @@ const Tamilnadu = ({navigation}) => {
                 style={{
                   width: 120,
                   height: 100,
-                  marginLeft:140,
-                  marginTop:10,
-                  elevation:55,
-                  shadowColor:"yellow"
+                  marginLeft: 140,
+                  marginTop: 10,
+                  elevation: 55,
+                  shadowColor: 'yellow',
                 }}
               />
             </View>

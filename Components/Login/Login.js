@@ -36,7 +36,7 @@ export default class Login extends Component {
           () => {
             // let userList = this.state.user.usersData;
             // this.setState(userList)
-            console.log('USERLogin', this.state.user.usersData);
+            // console.log('USERLogin', this.state.user.usersData);
 
             // .catch(err => {
             //   console.log(err);

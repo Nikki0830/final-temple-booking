@@ -32,8 +32,9 @@ export default class Signup extends Component {
         cpassword: this.state.cpassword,
       })
       .then(response => {
-        console.log(response.data);
+       
         console.log('Nikita 1 -', response.data);
+        console.log('response', response);
         // dispatch(formdata(response.data));
       })
       .catch(err => {

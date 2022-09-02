@@ -9,7 +9,7 @@ export default class Lottify extends Component {
   render() {
     setTimeout(() => {
         this.props.navigation.navigate('Statesearch')
-    }, 4000);
+    }, 3000);
     return (
       <View>
         <ImageBackground
